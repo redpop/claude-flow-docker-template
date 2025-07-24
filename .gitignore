@@ -1,0 +1,22 @@
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# direnv
+.direnv
+
+# IDE
+.vscode
+.idea
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Testing artifacts from template usage
+test-project/
+tmp/

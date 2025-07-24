@@ -1,0 +1,115 @@
+# Docker Compose configuration for Claude Flow development environment
+
+services:
+  claude-flow:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+      args:
+        NODE_VERSION: ${NODE_VERSION:-22}
+        PACKAGE_MANAGER: ${PACKAGE_MANAGER:-pnpm}
+        CLAUDE_FLOW_VERSION: ${CLAUDE_FLOW_VERSION:-alpha}
+        USER_UID: ${USER_UID:-1001}
+        USER_GID: ${USER_GID:-1001}
+        EXTRA_PACKAGES: ${EXTRA_PACKAGES:-}
+    image: ${PROJECT_NAME:-myproject}-claude-flow:latest
+    container_name: ${PROJECT_NAME:-myproject}-claude-flow
+    volumes:
+      # Project directory - adjust path as needed
+      - ${PROJECT_PATH:-.}:/app:rw
+      # Docker socket for container operations (optional)
+      - /var/run/docker.sock:/var/run/docker.sock
+      # Separate volume for node_modules for better performance
+      - ${PROJECT_NAME:-myproject}_node_modules:/app/node_modules
+      # Cache directories
+      - ${PROJECT_NAME:-myproject}_pnpm_store:/app/.pnpm-store
+      - ${PROJECT_NAME:-myproject}_npm_cache:/root/.npm
+    environment:
+      # API Keys
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      # Development environment
+      - NODE_ENV=${NODE_ENV:-development}
+      # Deno configuration
+      - DENO_INSTALL=/root/.deno
+      - PATH=/root/.deno/bin:${PATH}
+      # Package manager
+      - PACKAGE_MANAGER=${PACKAGE_MANAGER:-pnpm}
+      # Custom environment variables
+      - CUSTOM_ENV_1=${CUSTOM_ENV_1:-}
+      - CUSTOM_ENV_2=${CUSTOM_ENV_2:-}
+    working_dir: /app
+    tty: true
+    stdin_open: true
+    ports:
+      # Vite dev server
+      - "${VITE_PORT:-5173}:5173"
+      # Vite preview
+      - "${PREVIEW_PORT:-4173}:4173"
+      # Claude Flow UI
+      - "${CLAUDE_FLOW_PORT:-3000}:3000"
+      # Alternative ports
+      - "${ALT_PORT_1:-8080}:8080"
+      - "${ALT_PORT_2:-3001}:3001"
+      # Add more ports as needed
+    networks:
+      - claude-network
+    restart: unless-stopped
+    # Resource limits (optional)
+    deploy:
+      resources:
+        limits:
+          cpus: '${CPU_LIMIT:-2}'
+          memory: ${MEMORY_LIMIT:-4G}
+        reservations:
+          cpus: '${CPU_RESERVATION:-0.5}'
+          memory: ${MEMORY_RESERVATION:-512M}
+
+  # Optional: PostgreSQL database
+  postgres:
+    image: postgres:${POSTGRES_VERSION:-16}-alpine
+    container_name: ${PROJECT_NAME:-myproject}-postgres
+    profiles:
+      - with-db
+    environment:
+      POSTGRES_USER: ${DB_USER:-devuser}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-devpass}
+      POSTGRES_DB: ${DB_NAME:-devdb}
+    volumes:
+      - ${PROJECT_NAME:-myproject}_postgres_data:/var/lib/postgresql/data
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    networks:
+      - claude-network
+    restart: unless-stopped
+
+  # Optional: Redis cache
+  redis:
+    image: redis:${REDIS_VERSION:-7}-alpine
+    container_name: ${PROJECT_NAME:-myproject}-redis
+    profiles:
+      - with-cache
+    volumes:
+      - ${PROJECT_NAME:-myproject}_redis_data:/data
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    networks:
+      - claude-network
+    restart: unless-stopped
+
+networks:
+  claude-network:
+    driver: bridge
+    name: ${PROJECT_NAME:-myproject}_network
+
+volumes:
+  # Named volumes with project prefix
+  myproject_postgres_data:
+    name: ${PROJECT_NAME:-myproject}_postgres_data
+  myproject_redis_data:
+    name: ${PROJECT_NAME:-myproject}_redis_data
+  myproject_node_modules:
+    name: ${PROJECT_NAME:-myproject}_node_modules
+  myproject_pnpm_store:
+    name: ${PROJECT_NAME:-myproject}_pnpm_store
+  myproject_npm_cache:
+    name: ${PROJECT_NAME:-myproject}_npm_cache

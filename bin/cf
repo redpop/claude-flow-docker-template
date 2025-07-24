@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Shortcut for claude-flow (recommended, without shim)
+
+# Get the directory where this script is located
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PROJECT_ROOT="${PROJECT_ROOT:-$(dirname "$SCRIPT_DIR")}"
+
+# Check if running from project root
+if [ ! -f "$PROJECT_ROOT/docker-compose.yml" ] && [ ! -f "$PROJECT_ROOT/docker/docker-compose.yml" ]; then
+    echo "Error: docker-compose.yml not found. Are you in the project root?"
+    exit 1
+fi
+
+# Use appropriate docker-compose file
+if [ -f "$PROJECT_ROOT/docker/docker-compose.yml" ]; then
+    COMPOSE_FILE="$PROJECT_ROOT/docker/docker-compose.yml"
+else
+    COMPOSE_FILE="$PROJECT_ROOT/docker-compose.yml"
+fi
+
+# Check if container is running
+if ! docker compose -f "$COMPOSE_FILE" ps | grep -q "claude-flow.*running"; then
+    echo "Starting Claude Flow container..."
+    docker compose -f "$COMPOSE_FILE" up -d
+    sleep 2
+fi
+
+# Execute command in container
+docker compose -f "$COMPOSE_FILE" exec -T claude-flow bash -c "NODE_OPTIONS='' npx claude-flow@alpha $*"

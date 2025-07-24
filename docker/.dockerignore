@@ -1,0 +1,74 @@
+# Dependencies
+node_modules
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# Version control
+.git
+.gitignore
+.gitattributes
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# IDE and editor files
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Build outputs
+dist
+build
+out
+.next
+.nuxt
+.cache
+
+# Test coverage
+coverage
+.nyc_output
+
+# Claude Flow specific
+.claude/settings.local.json
+memory/
+coordination/
+.swarm/
+.hive-mind/
+
+# Database files
+*.db
+*.db-journal
+*.db-wal
+*.sqlite
+*.sqlite-journal
+*.sqlite-wal
+
+# Logs
+logs
+*.log
+
+# Temporary files
+tmp
+temp
+.tmp
+
+# Documentation (optional - uncomment if needed)
+# docs
+# *.md
+# !README.md
+
+# CI/CD
+.github
+.gitlab-ci.yml
+.circleci
+
+# Package manager files (keep lock files)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
