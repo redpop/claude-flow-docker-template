@@ -36,7 +36,7 @@ A reusable Docker environment for running Claude Flow in any project, with full 
 
 1. Download the template:
    ```bash
-   git clone https://github.com/yourusername/claude-flow-docker-template
+   git clone https://github.com/redpop/claude-flow-docker-template
    cd claude-flow-docker-template
    ```
 
@@ -256,8 +256,8 @@ MIT License - feel free to use this template in your projects!
 
 ## Support
 
-- 🐛 [Report issues](https://github.com/yourusername/claude-flow-docker-template/issues)
-- 💬 [Discussions](https://github.com/yourusername/claude-flow-docker-template/discussions)
+- 🐛 [Report issues](https://github.com/redpop/claude-flow-docker-template/issues)
+- 💬 [Discussions](https://github.com/redpop/claude-flow-docker-template/discussions)
 - 📚 [Claude Flow Documentation](https://docs.anthropic.com/claude-flow)
 
 ---

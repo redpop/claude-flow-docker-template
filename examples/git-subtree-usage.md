@@ -9,7 +9,7 @@ This example shows how to integrate the Claude Flow Docker template into an exis
 ```bash
 cd /path/to/your/project
 git subtree add --prefix=.claude-flow \
-  https://github.com/yourusername/claude-flow-docker-template.git main --squash
+  https://github.com/redpop/claude-flow-docker-template.git main --squash
 ```
 
 This creates a `.claude-flow` directory with all template files.
@@ -33,7 +33,7 @@ When the template is updated, you can pull the changes:
 
 ```bash
 git subtree pull --prefix=.claude-flow \
-  https://github.com/yourusername/claude-flow-docker-template.git main --squash
+  https://github.com/redpop/claude-flow-docker-template.git main --squash
 ```
 
 This will merge the updates while preserving your local modifications.
@@ -81,7 +81,7 @@ If you prefer to keep the template separate:
 
 ```bash
 # Clone template to a shared location
-git clone https://github.com/yourusername/claude-flow-docker-template.git \
+git clone https://github.com/redpop/claude-flow-docker-template.git \
   ~/shared/claude-flow-docker-template
 
 # In your project, create symlinks

@@ -27,4 +27,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Minimal base image (node:22-slim)
 - Proper .dockerignore to exclude sensitive files
 
-[1.0.0]: https://github.com/yourusername/claude-flow-docker-template/releases/tag/v1.0.0
+[1.0.0]: https://github.com/redpop/claude-flow-docker-template/releases/tag/v1.0.0
