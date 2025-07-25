@@ -28,7 +28,7 @@ A reusable Docker environment for running [Claude Flow](https://github.com/ruvne
 - 📦 **Project-agnostic** - Works with any Node.js project
 - 🛠️ **Flexible configuration** - Customize via environment variables
 - 🔄 **Multiple package managers** - Support for npm, yarn, and pnpm
-- 🎯 **Convenient shortcuts** - Simple commands like `cf` and `shell`
+- 🎯 **Convenient shortcuts** - Simple commands like `cf` and `cf-shell`
 - 🐳 **Production-ready** - Optimized Dockerfile with multi-stage builds
 - 🔒 **Security-focused** - Non-root user, minimal attack surface
 
@@ -71,8 +71,7 @@ After setup, these commands are available in your project:
 |---------|-------------|
 | `./bin/cf` | Run [Claude Flow](https://github.com/ruvnet/claude-flow) (recommended, without Deno shim) |
 | `./bin/claude-flow` | Run [Claude Flow](https://github.com/ruvnet/claude-flow) with Deno shim (for SPARC compatibility) |
-| `./bin/shell` | Enter the container shell |
-| `./bin/dev` | Start your development server in the container |
+| `./bin/cf-shell` | Enter the Claude Flow container shell |
 
 ### With direnv (Optional)
 
@@ -85,8 +84,7 @@ direnv allow
 Then you can use the commands without the `./bin/` prefix:
 ```bash
 cf swarm init --topology mesh
-shell
-dev
+cf-shell
 ```
 
 ## Configuration
@@ -96,15 +94,12 @@ dev
 Edit `.env` to customize your setup (optional):
 
 ```bash
-# Project settings
-PROJECT_NAME=myproject
-PACKAGE_MANAGER=pnpm  # or yarn, npm
-NODE_VERSION=22
-CLAUDE_FLOW_VERSION=alpha
+# User Configuration (automatically set by setup.sh)
+USER_UID=1001
+USER_GID=1001
 
-# Resources (optional)
-CPU_LIMIT=2
-MEMORY_LIMIT=4G
+# Optional: Customize if needed
+PROJECT_NAME=myproject
 ```
 
 ### Starting Claude Flow
@@ -114,7 +109,7 @@ MEMORY_LIMIT=4G
 docker compose up -d
 
 # Or use the convenient shell script
-./bin/shell
+./bin/cf-shell
 ```
 
 ## Directory Structure
@@ -133,8 +128,7 @@ your-project/
 ├── bin/
 │   ├── cf
 │   ├── claude-flow
-│   ├── shell
-│   └── dev
+│   └── cf-shell
 ├── .envrc                  # direnv configuration
 ├── .env                    # Your configuration
 └── .env.example            # Configuration template
@@ -186,7 +180,7 @@ CLAUDE_FLOW_PORT=3001
 
 Enter the container for debugging:
 ```bash
-./bin/shell
+./bin/cf-shell
 # Inside container:
 claude-flow --version
 deno --version

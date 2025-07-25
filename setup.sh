@@ -160,8 +160,7 @@ echo "Next steps:"
 echo "1. Run 'direnv allow' if you have direnv installed"
 echo "2. Start using Claude Flow:"
 echo "   - ${BLUE}./bin/cf${NC} - Run Claude Flow"
-echo "   - ${BLUE}./bin/shell${NC} - Enter container shell"
-echo "   - ${BLUE}./bin/dev${NC} - Start development server"
+echo "   - ${BLUE}./bin/cf-shell${NC} - Enter Claude Flow container shell"
 echo ""
 echo "Or use Docker Compose directly:"
 echo "   - ${BLUE}docker compose up -d${NC} - Start container"
@@ -179,5 +178,5 @@ if [[ $start_now =~ ^[Yy]$ ]]; then
     fi
     echo -e "${GREEN}✅ Container started!${NC}"
     echo ""
-    echo "Run ${BLUE}./bin/shell${NC} to enter the container."
+    echo "Run ${BLUE}./bin/cf-shell${NC} to enter the container."
 fi

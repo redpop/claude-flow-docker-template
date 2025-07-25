@@ -47,22 +47,9 @@ services:
       - "${PREVIEW_PORT:-4173}:4173"
       # Claude Flow UI
       - "${CLAUDE_FLOW_PORT:-3000}:3000"
-      # Alternative ports
-      - "${ALT_PORT_1:-8080}:8080"
-      - "${ALT_PORT_2:-3001}:3001"
-      # Add more ports as needed
     networks:
       - claude-network
     restart: unless-stopped
-    # Resource limits (optional)
-    deploy:
-      resources:
-        limits:
-          cpus: '${CPU_LIMIT:-2}'
-          memory: ${MEMORY_LIMIT:-4G}
-        reservations:
-          cpus: '${CPU_RESERVATION:-0.5}'
-          memory: ${MEMORY_RESERVATION:-512M}
 
 
 networks:

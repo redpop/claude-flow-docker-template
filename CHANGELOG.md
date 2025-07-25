@@ -5,6 +5,42 @@ All notable changes to the Claude Flow Docker Template will be documented in thi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2025-07-25
+
+### Changed
+- Renamed `bin/shell` to `bin/cf-shell` for clarity
+- Simplified `.env.example` to absolute minimum (only USER_UID/GID and PROJECT_NAME)
+- Streamlined docker-compose.yml further (removed alternative ports and resource limits)
+- Updated all documentation to reflect new script names
+
+### Removed
+- `bin/dev` script - not needed for Claude Flow usage
+- Alternative ports (ALT_PORT_1/2) from docker-compose.yml
+- Resource limits configuration from docker-compose.yml
+- Package manager, Node version, and Claude Flow version from .env.example
+- Examples directory with git-subtree and npm-package docs
+- test-template-auto.sh script
+
+### Why
+- Focus on absolute minimum needed for Claude Flow Docker workaround
+- Reduce configuration complexity
+- Remove all non-essential features
+- Make template as simple as possible
+
+## [1.3.0] - 2025-07-25
+
+### Changed
+- Removed all ANTHROPIC_API_KEY references from docker-compose.yml
+- Removed API key from .env.example - no longer needed
+- Updated README to remove all API key mentions
+- Updated setup.sh to remove API key warnings
+
+### Why
+- Claude Flow uses Claude Code CLI authentication
+- No separate API key needed = no extra costs
+- Users manage their own auth through Claude Code
+- Cleaner, simpler template focused on Docker/Node/Deno issues only
+
 ## [1.2.0] - 2025-07-25
 
 ### Removed
