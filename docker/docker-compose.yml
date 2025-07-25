@@ -64,37 +64,6 @@ services:
           cpus: '${CPU_RESERVATION:-0.5}'
           memory: ${MEMORY_RESERVATION:-512M}
 
-  # Optional: PostgreSQL database
-  postgres:
-    image: postgres:${POSTGRES_VERSION:-16}-alpine
-    container_name: ${PROJECT_NAME:-myproject}-postgres
-    profiles:
-      - with-db
-    environment:
-      POSTGRES_USER: ${DB_USER:-devuser}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-devpass}
-      POSTGRES_DB: ${DB_NAME:-devdb}
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "${DB_PORT:-5432}:5432"
-    networks:
-      - claude-network
-    restart: unless-stopped
-
-  # Optional: Redis cache
-  redis:
-    image: redis:${REDIS_VERSION:-7}-alpine
-    container_name: ${PROJECT_NAME:-myproject}-redis
-    profiles:
-      - with-cache
-    volumes:
-      - redis_data:/data
-    ports:
-      - "${REDIS_PORT:-6379}:6379"
-    networks:
-      - claude-network
-    restart: unless-stopped
 
 networks:
   claude-network:
@@ -103,10 +72,6 @@ networks:
 
 volumes:
   # Named volumes with project prefix for isolation
-  postgres_data:
-    name: ${PROJECT_NAME:-myproject}_postgres_data
-  redis_data:
-    name: ${PROJECT_NAME:-myproject}_redis_data
   node_modules:
     name: ${PROJECT_NAME:-myproject}_node_modules
   pnpm_store:

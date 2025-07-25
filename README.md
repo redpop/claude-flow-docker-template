@@ -115,31 +115,15 @@ CPU_LIMIT=2
 MEMORY_LIMIT=4G
 ```
 
-### Docker Compose Profiles
+### Starting Claude Flow
 
-The template includes **optional development services** that are disabled by default:
-
-#### 🗄️ PostgreSQL Database
 ```bash
-# Start Claude Flow with PostgreSQL
-docker compose --profile with-db up -d
-```
-**Use case**: Projects requiring persistent data storage, user management, or complex queries.
+# Start the Claude Flow container
+docker compose up -d
 
-#### 🚀 Redis Cache
-```bash
-# Start Claude Flow with Redis
-docker compose --profile with-cache up -d
+# Or use the convenient shell script
+./bin/shell
 ```
-**Use case**: Projects needing session management, caching, or real-time features.
-
-#### 🔄 Both Services
-```bash
-# Start with full stack
-docker compose --profile with-db --profile with-cache up -d
-```
-
-**Note**: These services are **optional extras** for full-stack development. Most Claude Flow use cases only need the core container.
 
 ## Directory Structure
 

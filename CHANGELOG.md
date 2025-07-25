@@ -5,6 +5,18 @@ All notable changes to the Claude Flow Docker Template will be documented in thi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2025-07-25
+
+### Removed
+- **PostgreSQL and Redis services** - Simplified template to focus solely on Claude Flow functionality
+- Database and cache configuration from .env.example
+- Docker Compose profiles documentation for optional services
+
+### Changed
+- Streamlined docker-compose.yml to minimal Claude Flow setup only
+- Updated README to remove database/cache service references
+- Cleaner, more focused template for pure Claude Flow usage
+
 ## [1.1.0] - 2025-07-25
 
 ### Fixed
