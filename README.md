@@ -1,10 +1,10 @@
 # Claude Flow Docker Template 🌊
 
-A reusable Docker environment for running Claude Flow in any project, solving the current Node.js/Deno compatibility issues with SPARC mode.
+A reusable Docker environment for running [Claude Flow](https://github.com/ruvnet/claude-flow) in any project, solving the current Node.js/Deno compatibility issues with SPARC mode.
 
 ## 🎯 Why This Template Exists
 
-**Current Problem**: Claude Flow v2.0.0-alpha has compatibility issues with Node.js environments, specifically:
+**Current Problem**: [Claude Flow](https://github.com/ruvnet/claude-flow) v2.0.0-alpha has compatibility issues with Node.js environments, specifically:
 - "Deno is not defined" errors when using SPARC mode
 - Runtime conflicts between Node.js and Deno dependencies
 - Inconsistent behavior across different operating systems
@@ -15,14 +15,14 @@ A reusable Docker environment for running Claude Flow in any project, solving th
 - ✅ Ensures consistent behavior across macOS, Linux, and Windows
 - ✅ Eliminates local environment conflicts
 
-**Future Outlook**: This template serves as a **temporary workaround** until Claude Flow's Node.js/Deno integration is stabilized. However, it will remain valuable for:
+**Future Outlook**: This template serves as a **temporary workaround** until [Claude Flow's](https://github.com/ruvnet/claude-flow) Node.js/Deno integration is stabilized. However, it will remain valuable for:
 - Consistent development environments across teams
-- Isolation of Claude Flow dependencies
+- Isolation of [Claude Flow](https://github.com/ruvnet/claude-flow) dependencies
 - Production deployments requiring containerization
 
 ## Features
 
-- 🚀 **One-command setup** - Get Claude Flow running in minutes
+- 🚀 **One-command setup** - Get [Claude Flow](https://github.com/ruvnet/claude-flow) running in minutes
 - 🔧 **Deno support** - Full SPARC mode compatibility with Deno shim
 - 📦 **Project-agnostic** - Works with any Node.js project
 - 🛠️ **Flexible configuration** - Customize via environment variables
@@ -45,7 +45,7 @@ A reusable Docker environment for running Claude Flow in any project, solving th
    ```bash
    ANTHROPIC_API_KEY=your_key_here
    ```
-5. Start using Claude Flow:
+5. Start using [Claude Flow](https://github.com/ruvnet/claude-flow):
    ```bash
    ./bin/cf --help
    ```
@@ -64,7 +64,7 @@ A reusable Docker environment for running Claude Flow in any project, solving th
    /path/to/claude-flow-docker-template/setup.sh
    ```
 
-3. Configure and start using Claude Flow as above
+3. Configure and start using [Claude Flow](https://github.com/ruvnet/claude-flow) as above
 
 ## Available Commands
 
@@ -72,8 +72,8 @@ After setup, these commands are available in your project:
 
 | Command | Description |
 |---------|-------------|
-| `./bin/cf` | Run Claude Flow (recommended, without Deno shim) |
-| `./bin/claude-flow` | Run Claude Flow with Deno shim (for SPARC compatibility) |
+| `./bin/cf` | Run [Claude Flow](https://github.com/ruvnet/claude-flow) (recommended, without Deno shim) |
+| `./bin/claude-flow` | Run [Claude Flow](https://github.com/ruvnet/claude-flow) with Deno shim (for SPARC compatibility) |
 | `./bin/shell` | Enter the container shell |
 | `./bin/dev` | Start your development server in the container |
 
@@ -305,9 +305,8 @@ MIT License - feel free to use this template in your projects!
 ## Support
 
 - 🐛 [Report issues](https://github.com/redpop/claude-flow-docker-template/issues)
-- 💬 [Discussions](https://github.com/redpop/claude-flow-docker-template/discussions)
-- 📚 [Claude Flow Documentation](https://docs.anthropic.com/claude-flow)
+- 📚 [Claude Flow Documentation](https://github.com/ruvnet/claude-flow)
 
 ---
 
-Made with ❤️ for the Claude Flow community
+Made with ❤️ for the [Claude Flow](https://github.com/ruvnet/claude-flow) community
