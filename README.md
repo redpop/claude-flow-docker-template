@@ -6,8 +6,8 @@ A reusable Docker environment for running [Claude Flow](https://github.com/ruvne
 ## 🎯 Why This Template Exists
 
 **Current Problem**: [Claude Flow](https://github.com/ruvnet/claude-flow) v2.0.0-alpha has compatibility issues with Node.js environments, specifically:
-- "Deno is not defined" errors when using SPARC mode
-- Runtime conflicts between Node.js and Deno dependencies
+- "Deno is not defined" errors when using SPARC mode ([Issue #146](https://github.com/ruvnet/claude-flow/issues/146))
+- Runtime conflicts between Node.js and Deno dependencies ([Issue #108](https://github.com/ruvnet/claude-flow/issues/108))
 - Inconsistent behavior across different operating systems
 
 **This Template Solves**:
