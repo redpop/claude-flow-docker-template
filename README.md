@@ -187,61 +187,6 @@ deno --version
 node --version
 ```
 
-## Advanced Usage
-
-### Custom Dockerfile Extensions
-
-Create `docker/Dockerfile.local` to extend the base image:
-
-```dockerfile
-FROM claude-flow:latest
-
-# Add your customizations
-RUN apt-get update && apt-get install -y vim
-
-# Add custom tools
-COPY my-tools /usr/local/bin/
-```
-
-### CI/CD Integration
-
-Example GitHub Actions workflow:
-
-```yaml
-name: Claude Flow CI
-on: [push]
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Start Claude Flow
-        run: docker compose up -d
-      - name: Run Claude Flow task
-        run: ./bin/cf task orchestrate --task "Run tests"
-```
-
-### Production Deployment
-
-For production use:
-
-1. Build optimized image:
-   ```bash
-   docker build --target production -t myapp:latest .
-   ```
-
-2. Use production compose file:
-   ```yaml
-   # docker-compose.prod.yml
-   services:
-     claude-flow:
-       image: myapp:latest
-       restart: always
-       deploy:
-         replicas: 2
-   ```
-
 ## 🛠️ Recent Improvements (v1.1.0)
 
 **Fixed in this version**:
