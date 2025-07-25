@@ -250,21 +250,7 @@ For production use:
 - ✅ Automatic .env symlink creation for docker/ subdirectory
 - ✅ Better cross-platform compatibility
 
-## 🚀 Roadmap & Future Plans
-
-### Short Term (Template Evolution)
-- [ ] Windows PowerShell setup script
-- [ ] Multi-architecture Docker builds (ARM64/AMD64)
-- [ ] Integration with VS Code Dev Containers
-- [ ] Automated testing across platforms
-
-### Long Term (Post Claude Flow Stability)
-- [ ] Migration guide when native Claude Flow support arrives
-- [ ] Optional local installation detection and fallback
-- [ ] Performance benchmarking tools
-- [ ] Advanced swarm orchestration templates
-
-### 🔄 When Will This Template Be Obsolete?
+## 🔄 When Will This Template Be Obsolete?
 
 This template becomes less critical when:
 - ✅ Claude Flow natively supports Node.js environments without Deno conflicts
