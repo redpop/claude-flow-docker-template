@@ -110,9 +110,8 @@ copy_with_check "$TEMPLATE_DIR/.env.example" "$TARGET_DIR/.env.example"
 if [ ! -f "$TARGET_DIR/.env" ]; then
     cp "$TARGET_DIR/.env.example" "$TARGET_DIR/.env"
     echo -e "${GREEN}✅ Created .env from .env.example${NC}"
-    echo -e "${YELLOW}⚠️  Please edit .env and add your ANTHROPIC_API_KEY${NC}"
 else
-    echo -e "${YELLOW}⚠️  .env already exists. Please ensure ANTHROPIC_API_KEY is set.${NC}"
+    echo -e "${YELLOW}⚠️  .env already exists, keeping your configuration.${NC}"
 fi
 
 # Get user's UID and GID
@@ -158,9 +157,8 @@ echo ""
 echo -e "${GREEN}🎉 Claude Flow Docker setup complete!${NC}"
 echo ""
 echo "Next steps:"
-echo "1. Edit .env and add your ANTHROPIC_API_KEY"
-echo "2. Run 'direnv allow' if you have direnv installed"
-echo "3. Start using Claude Flow:"
+echo "1. Run 'direnv allow' if you have direnv installed"
+echo "2. Start using Claude Flow:"
 echo "   - ${BLUE}./bin/cf${NC} - Run Claude Flow"
 echo "   - ${BLUE}./bin/shell${NC} - Enter container shell"
 echo "   - ${BLUE}./bin/dev${NC} - Start development server"

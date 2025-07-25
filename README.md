@@ -1,5 +1,6 @@
 # Claude Flow Docker Template 🌊
 
+
 A reusable Docker environment for running [Claude Flow](https://github.com/ruvnet/claude-flow) in any project, solving the current Node.js/Deno compatibility issues with SPARC mode.
 
 ## 🎯 Why This Template Exists
@@ -41,11 +42,7 @@ A reusable Docker environment for running [Claude Flow](https://github.com/ruvne
    ```bash
    ./setup.sh
    ```
-4. Add your API key to `.env`:
-   ```bash
-   ANTHROPIC_API_KEY=your_key_here
-   ```
-5. Start using [Claude Flow](https://github.com/ruvnet/claude-flow):
+4. Start using [Claude Flow](https://github.com/ruvnet/claude-flow):
    ```bash
    ./bin/cf --help
    ```
@@ -96,19 +93,14 @@ dev
 
 ### Environment Variables
 
-Edit `.env` to customize your setup:
+Edit `.env` to customize your setup (optional):
 
 ```bash
-# Required
-ANTHROPIC_API_KEY=your_api_key_here
-
 # Project settings
 PROJECT_NAME=myproject
 PACKAGE_MANAGER=pnpm  # or yarn, npm
-
-# Ports
-VITE_PORT=5173
-CLAUDE_FLOW_PORT=3000
+NODE_VERSION=22
+CLAUDE_FLOW_VERSION=alpha
 
 # Resources (optional)
 CPU_LIMIT=2

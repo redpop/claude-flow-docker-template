@@ -25,8 +25,8 @@ services:
       - pnpm_store:/app/.pnpm-store
       - npm_cache:/root/.npm
     environment:
-      # API Keys
-      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      # API Keys - NOT NEEDED! Claude Flow uses Claude Code CLI auth
+      # - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
       # Development environment
       - NODE_ENV=${NODE_ENV:-development}
       # Deno configuration
