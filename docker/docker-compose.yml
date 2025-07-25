@@ -3,7 +3,7 @@
 services:
   claude-flow:
     build:
-      context: .
+      context: ..
       dockerfile: ./docker/Dockerfile
       args:
         NODE_VERSION: ${NODE_VERSION:-22}
@@ -20,10 +20,10 @@ services:
       # Docker socket for container operations (optional)
       - /var/run/docker.sock:/var/run/docker.sock
       # Separate volume for node_modules for better performance
-      - ${PROJECT_NAME:-myproject}_node_modules:/app/node_modules
+      - node_modules:/app/node_modules
       # Cache directories
-      - ${PROJECT_NAME:-myproject}_pnpm_store:/app/.pnpm-store
-      - ${PROJECT_NAME:-myproject}_npm_cache:/root/.npm
+      - pnpm_store:/app/.pnpm-store
+      - npm_cache:/root/.npm
     environment:
       # API Keys
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
@@ -75,7 +75,7 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD:-devpass}
       POSTGRES_DB: ${DB_NAME:-devdb}
     volumes:
-      - ${PROJECT_NAME:-myproject}_postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     ports:
       - "${DB_PORT:-5432}:5432"
     networks:
@@ -89,7 +89,7 @@ services:
     profiles:
       - with-cache
     volumes:
-      - ${PROJECT_NAME:-myproject}_redis_data:/data
+      - redis_data:/data
     ports:
       - "${REDIS_PORT:-6379}:6379"
     networks:
@@ -102,14 +102,14 @@ networks:
     name: ${PROJECT_NAME:-myproject}_network
 
 volumes:
-  # Named volumes with project prefix
-  myproject_postgres_data:
+  # Named volumes with project prefix for isolation
+  postgres_data:
     name: ${PROJECT_NAME:-myproject}_postgres_data
-  myproject_redis_data:
+  redis_data:
     name: ${PROJECT_NAME:-myproject}_redis_data
-  myproject_node_modules:
+  node_modules:
     name: ${PROJECT_NAME:-myproject}_node_modules
-  myproject_pnpm_store:
+  pnpm_store:
     name: ${PROJECT_NAME:-myproject}_pnpm_store
-  myproject_npm_cache:
+  npm_cache:
     name: ${PROJECT_NAME:-myproject}_npm_cache

@@ -54,7 +54,19 @@ RUN npx claude-flow@${CLAUDE_FLOW_VERSION} --version || true
 # Create non-root user for better security
 ARG USER_UID=1001
 ARG USER_GID=1001
-RUN groupadd -g ${USER_GID} appuser && \
+
+# Handle common GID conflicts (especially macOS GID 20 "staff" group)
+RUN if getent group ${USER_GID} >/dev/null 2>&1; then \
+        echo "GID ${USER_GID} already exists, trying fallback GIDs..." && \
+        for gid in 1001 1000 999 501 502 503; do \
+            if ! getent group $gid >/dev/null 2>&1; then \
+                echo "Using fallback GID: $gid" && \
+                groupadd -g $gid appuser && break; \
+            fi; \
+        done; \
+    else \
+        groupadd -g ${USER_GID} appuser; \
+    fi && \
     useradd -m -u ${USER_UID} -g appuser -s /bin/bash appuser && \
     chown -R appuser:appuser /app
 

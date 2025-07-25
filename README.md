@@ -1,6 +1,24 @@
 # Claude Flow Docker Template 🌊
 
-A reusable Docker environment for running Claude Flow in any project, with full support for SPARC mode and Deno runtime.
+A reusable Docker environment for running Claude Flow in any project, solving the current Node.js/Deno compatibility issues with SPARC mode.
+
+## 🎯 Why This Template Exists
+
+**Current Problem**: Claude Flow v2.0.0-alpha has compatibility issues with Node.js environments, specifically:
+- "Deno is not defined" errors when using SPARC mode
+- Runtime conflicts between Node.js and Deno dependencies
+- Inconsistent behavior across different operating systems
+
+**This Template Solves**:
+- ✅ Provides isolated Docker environment with both Node.js and Deno
+- ✅ Includes custom Deno shim for Node.js compatibility
+- ✅ Ensures consistent behavior across macOS, Linux, and Windows
+- ✅ Eliminates local environment conflicts
+
+**Future Outlook**: This template serves as a **temporary workaround** until Claude Flow's Node.js/Deno integration is stabilized. However, it will remain valuable for:
+- Consistent development environments across teams
+- Isolation of Claude Flow dependencies
+- Production deployments requiring containerization
 
 ## Features
 
@@ -99,18 +117,29 @@ MEMORY_LIMIT=4G
 
 ### Docker Compose Profiles
 
-The template includes optional services:
+The template includes **optional development services** that are disabled by default:
 
+#### 🗄️ PostgreSQL Database
 ```bash
-# Start with PostgreSQL
+# Start Claude Flow with PostgreSQL
 docker compose --profile with-db up -d
+```
+**Use case**: Projects requiring persistent data storage, user management, or complex queries.
 
-# Start with Redis
+#### 🚀 Redis Cache
+```bash
+# Start Claude Flow with Redis
 docker compose --profile with-cache up -d
+```
+**Use case**: Projects needing session management, caching, or real-time features.
 
-# Start with both
+#### 🔄 Both Services
+```bash
+# Start with full stack
 docker compose --profile with-db --profile with-cache up -d
 ```
+
+**Note**: These services are **optional extras** for full-stack development. Most Claude Flow use cases only need the core container.
 
 ## Directory Structure
 
@@ -243,12 +272,47 @@ For production use:
          replicas: 2
    ```
 
+## 🛠️ Recent Improvements (v1.1.0)
+
+**Fixed in this version**:
+- ✅ Volume name mismatches in docker-compose.yml
+- ✅ macOS GID 20 conflict with intelligent fallback
+- ✅ Automatic .env symlink creation for docker/ subdirectory
+- ✅ Better cross-platform compatibility
+
+## 🚀 Roadmap & Future Plans
+
+### Short Term (Template Evolution)
+- [ ] Windows PowerShell setup script
+- [ ] Multi-architecture Docker builds (ARM64/AMD64)
+- [ ] Integration with VS Code Dev Containers
+- [ ] Automated testing across platforms
+
+### Long Term (Post Claude Flow Stability)
+- [ ] Migration guide when native Claude Flow support arrives
+- [ ] Optional local installation detection and fallback
+- [ ] Performance benchmarking tools
+- [ ] Advanced swarm orchestration templates
+
+### 🔄 When Will This Template Be Obsolete?
+
+This template becomes less critical when:
+- ✅ Claude Flow natively supports Node.js environments without Deno conflicts
+- ✅ SPARC mode works consistently across operating systems
+- ✅ Installation doesn't require runtime workarounds
+
+**Current Status**: Still necessary due to ongoing Deno/Node.js compatibility issues in Claude Flow alpha versions.
+
 ## Contributing
+
+We welcome contributions that improve cross-platform compatibility and ease of use:
 
 1. Fork the template repository
 2. Create your feature branch
-3. Test your changes thoroughly
-4. Submit a pull request
+3. Test your changes thoroughly across platforms
+4. Submit a pull request with clear description
+
+**Testing Priorities**: macOS, Linux, Windows, ARM64, AMD64
 
 ## License
 

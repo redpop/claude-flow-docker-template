@@ -119,13 +119,27 @@ fi
 USER_UID=$(id -u)
 USER_GID=$(id -g)
 
-# Update .env with user's UID/GID
+# Update .env with user's UID/GID and handle GID conflicts on macOS
 if [ -f "$TARGET_DIR/.env" ]; then
     if grep -q "USER_UID=" "$TARGET_DIR/.env"; then
+        # Handle macOS GID 20 conflict
+        if [ "$USER_GID" = "20" ] && [ "$(uname -s)" = "Darwin" ]; then
+            echo -e "${YELLOW}⚠️  Detected macOS with GID 20 (staff group). Using fallback GID 501.${NC}"
+            USER_GID=501
+        fi
+        
         sed -i.bak "s/USER_UID=.*/USER_UID=$USER_UID/" "$TARGET_DIR/.env"
         sed -i.bak "s/USER_GID=.*/USER_GID=$USER_GID/" "$TARGET_DIR/.env"
         rm -f "$TARGET_DIR/.env.bak"
-        echo -e "${GREEN}✅ Updated USER_UID and USER_GID in .env${NC}"
+        echo -e "${GREEN}✅ Updated USER_UID ($USER_UID) and USER_GID ($USER_GID) in .env${NC}"
+    fi
+fi
+
+# Create .env symlink in docker directory for easy access
+if [ "$layout_choice" = "2" ] && [ -f "$TARGET_DIR/.env" ]; then
+    if [ ! -f "$TARGET_DIR/docker/.env" ]; then
+        ln -sf "../.env" "$TARGET_DIR/docker/.env"
+        echo -e "${GREEN}✅ Created .env symlink in docker/ directory${NC}"
     fi
 fi
 
